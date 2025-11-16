@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mico Photography</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+
+<div id="content">
+
+    <!-- LOGO + TAGLINE -->
+    <header>
+        <img src="logo.png" alt="Logo" class="logo">
+        <div id="logo-shield"></div>
+
+        <p class="tagline">Welcome to my gallery — scroll to explore.</p>
+
+        <!-- SOCIAL ICONS -->
+        <div class="socials">
+            <a href="https://www.instagram.com/micophotography098/" target="_blank">
+                <img src="instagram.png" class="social-icon" alt="Instagram">
+            </a>
+            <a href="https://www.tiktok.com/@its.micooo098" target="_blank">
+                <img src="tiktok.png" class="social-icon" alt="TikTok">
+            </a>
+            <a href="https://uniteddrive.ro" target="_blank">
+                <img src="utd.png" class="social-icon utd" alt="United Drive">
+            </a>
+        </div>
+    </header>
+
+    <!-- ALBUM SECTION -->
+    <h2 class="portfolio-title">Albums</h2>
+    <div id="album-container" class="album-container"></div>
+
+    <!-- GALLERY VIEW (inside an album) -->
+    <div id="album-view" class="album-view hidden">
+        <button id="backToAlbums" class="back-btn">← Back to Albums</button>
+        <h2 id="albumViewTitle" class="album-view-title"></h2>
+        <div id="gallery" class="gallery"></div>
+    </div>
+
+    <!-- OWNER PANEL BUTTON -->
+    <footer>
+        <p>© 2025 Mico Photography. Coded & uploaded by Mico</p>
+    </footer>
+
+    <button id="ownerBtn" class="owner-btn">Panel</button>
+</div>
+
+<!-- OWNER PANEL MODAL -->
+<div id="ownerPanel" class="modal hidden">
+    <div class="modal-content">
+        <span id="closeOwnerPanel" class="close">&times;</span>
+
+        <h2>Owner Panel</h2>
+
+        <!-- TABS -->
+        <div class="owner-tabs">
+            <button class="owner-tab active" data-tab="albums">Albums</button>
+            <button class="owner-tab" data-tab="manage">Manage Album</button>
+        </div>
+
+        <!-- TAB: ALBUMS -->
+        <div id="tab-albums" class="owner-tab-content active">
+            <h3>Albums</h3>
+            <p class="small-note">
+                Create, view and delete albums. Click <b>Manage</b> to upload and edit photos inside an album.
+            </p>
+
+            <div class="album-create-row">
+                <input type="text" id="newAlbumName" placeholder="Album name">
+                <input type="file" id="albumCoverInput" accept="image/*">
+                <button id="createAlbumBtn" class="primary-btn">Create Album</button>
+            </div>
+            <p class="small-note">
+                If you don’t set a cover, a random photo from the album will be used.
+            </p>
+
+            <div id="ownerAlbumList" class="owner-album-list"></div>
+        </div>
+
+        <!-- TAB: MANAGE ALBUM -->
+        <div id="tab-manage" class="owner-tab-content">
+            <h3>Manage Album</h3>
+            <p id="manageAlbumHint" class="small-note">
+                Select an album from the <b>Albums</b> tab and click <b>Manage</b> to edit it here.
+            </p>
+
+            <div id="manageAlbumSection" class="manage-album-section hidden">
+                <h4 id="manageAlbumTitle"></h4>
+
+                <p class="small-note">
+                    Upload photos directly into this album. Images are automatically compressed for speed and to stay under Firestore limits.
+                </p>
+
+                <input type="file" id="albumUploadInput" accept="image/*" multiple>
+                <button id="albumUploadBtn" class="primary-btn">Upload to this album</button>
+
+                <h4 style="margin-top: 18px;">Photos in this album</h4>
+                <div id="albumManagePhotos" class="manage-photos"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
